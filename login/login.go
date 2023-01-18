@@ -39,7 +39,7 @@ func Login(i LoginInput) (LoginResponse, error) {
 	}
 
 	req.Header.Set("Content-Type", "application/json")
-	req.Header.Set("User-Agent", "https://github.com/moskyb/shareies-fbar-caluclator (please send me an email at ben@mosk.nz if i'm causing trouble!)")
+	req.Header.Set("User-Agent", "https://github.com/moskyb/sharesies-fbar-calculator (please send me an email at ben@mosk.nz if i'm causing trouble!)")
 
 	resp, err := http.DefaultClient.Do(req)
 	if err != nil {
