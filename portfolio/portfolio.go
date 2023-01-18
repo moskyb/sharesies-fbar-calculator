@@ -41,23 +41,24 @@ type PortfolioHistoryItem struct {
 }
 
 type SharesiesPortfolio struct {
-	UUID                       string         `json:"uuid"`
-	Currency                   string         `json:"currency"`
-	Date                       *PortfolioDate `json:"date"`
-	PortfolioValue             float64        `json:"portfolio_value"`
-	TotalReturn                float64        `json:"total_return"`
-	SimpleReturn               float64        `json:"simple_return"`
-	CostBasis                  float64        `json:"cost_basis"`
-	CostBasisMax               float64        `json:"cost_basis_max"`
-	PortfolioRiskType          string         `json:"portfolio_risk_type"`
-	Dividends                  float64        `json:"dividends"`
-	ManagedFundTransactionFees float64        `json:"managed_fund_transaction_fees"`
-	TaxPaid                    float64        `json:"tax_paid"`
-	TransactionFees            float64        `json:"transaction_fees"`
-	ADRFees                    float64        `json:"adr_fees"`
-	RealisedCapitalGain        float64        `json:"realised_capital_gain"`
-	RealisedCurrencyGain       float64        `json:"realised_currency_gain"`
-	RealisedCostBasis          float64        `json:"realised_cost_basis"`
+	Date *PortfolioDate `json:"date"`
+
+	UUID                       string  `json:"uuid"`
+	Currency                   string  `json:"currency"`
+	PortfolioValue             float64 `json:"portfolio_value"`
+	TotalReturn                float64 `json:"total_return"`
+	SimpleReturn               float64 `json:"simple_return"`
+	CostBasis                  float64 `json:"cost_basis"`
+	CostBasisMax               float64 `json:"cost_basis_max"`
+	PortfolioRiskType          string  `json:"portfolio_risk_type"`
+	Dividends                  float64 `json:"dividends"`
+	ManagedFundTransactionFees float64 `json:"managed_fund_transaction_fees"`
+	TaxPaid                    float64 `json:"tax_paid"`
+	TransactionFees            float64 `json:"transaction_fees"`
+	ADRFees                    float64 `json:"adr_fees"`
+	RealisedCapitalGain        float64 `json:"realised_capital_gain"`
+	RealisedCurrencyGain       float64 `json:"realised_currency_gain"`
+	RealisedCostBasis          float64 `json:"realised_cost_basis"`
 
 	PortfolioRisk struct {
 		Higher PortfolioSliceValue `json:"higher"`
@@ -98,6 +99,8 @@ func Fetch(id, token string) (*SharesiesPortfolio, error) {
 		return nil, err
 	}
 
+	req.Header.Set("Content-Type", "application/json")
+	req.Header.Set("User-Agent", "https://github.com/moskyb/sharesies-fbar-calculator (please send me an email at ben@mosk.nz if i'm causing trouble!)")
 	req.Header.Set("Authorization", fmt.Sprintf("Bearer %s", token))
 
 	resp, err := http.DefaultClient.Do(req)
